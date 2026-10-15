@@ -1,7 +1,7 @@
 {
   "productName": "BentoPDF",
   "version": "1.0.0",
-  "identifier": "com.ethan.bentopdf",
+  "identifier": "com.yourname.bentopdf",
   "build": {
     "frontendDist": "../dist",
     "beforeBuildCommand": "npm run build"
@@ -17,7 +17,13 @@
         "resizable": true,
         "center": true
       }
-    ]
+    ],
+    "security": {
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp"
+      }
+    }
   },
   "bundle": {
     "active": true,
