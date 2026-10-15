@@ -5,13 +5,19 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Keep Unix line endings
+        run: git config --global core.autocrlf false
 
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
 
       - uses: dtolnay/rust-toolchain@stable
+
+      - name: Run npm scripts with bash
+        run: npm config set script-shell "C:\Program Files\Git\bin\bash.exe"
 
       - name: Install dependencies
         run: npm install
