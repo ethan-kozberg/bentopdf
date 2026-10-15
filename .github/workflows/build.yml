@@ -1,0 +1,44 @@
+name: Build Windows exe
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Add Tauri CLI
+        run: npm install --no-save @tauri-apps/cli@^2
+
+      - name: Generate Tauri project
+        shell: bash
+        run: |
+          if [ ! -d src-tauri ]; then
+            npx tauri init --ci \
+              --app-name BentoPDF \
+              --window-title BentoPDF \
+              --frontend-dist ../dist \
+              --dev-url http://localhost:5173 \
+              --before-dev-command "npm run dev" \
+              --before-build-command "npm run build"
+          fi
+          cp tauri.conf.override.json src-tauri/tauri.windows.conf.json
+
+      - name: Build
+        run: npx tauri build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bentopdf-windows
+          path: |
+            src-tauri/target/release/bundle/nsis/*.exe
+            src-tauri/target/release/*.exe
