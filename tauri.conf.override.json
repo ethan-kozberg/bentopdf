@@ -1,7 +1,7 @@
 {
   "productName": "BentoPDF",
   "version": "1.0.0",
-  "identifier": "com.yourname.bentopdf",
+  "identifier": "com.ethan.bentopdf",
   "build": {
     "frontendDist": "../dist",
     "beforeBuildCommand": "npm run build"
