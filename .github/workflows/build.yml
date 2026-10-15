@@ -42,6 +42,8 @@ jobs:
           tar xzf wasm-dl/tesseract.js-core-*.tgz -C $W/ocr/core --strip-components=1
           curl -fsSL https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng/4.0.0_best_int/eng.traineddata.gz -o $W/ocr/lang-data/eng.traineddata.gz
           curl -fsSL https://raw.githack.com/googlefonts/noto-fonts/main/hinted/ttf/NotoSans/NotoSans-Regular.ttf -o $W/ocr/fonts/NotoSans-Regular.ttf
+          curl -fsSL https://raw.githack.com/googlefonts/noto-fonts/main/hinted/ttf/NotoSans/NotoSans-Regular.ttf -o $W/ocr/fonts/NotoSans-Regular.ttf
+          find $W -name "*.html" -delete
 
       - name: Generate Tauri project
         shell: bash
